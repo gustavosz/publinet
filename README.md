@@ -1,61 +1,201 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# PUBLINET
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Prueba técnica
 
-## About Laravel
+# Endpoints requeridos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Crear nueva empresa
+### POST /api/companies/
+    body {
+        "name": "required|string|min:3|unique",
+        "country": "required|string|min:3"
+    }
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    return 201
+    {
+        "data": {
+            "id": 4,
+            "name": "TestStore",
+            "country": "CountryTest"
+        },
+        "status": true,
+        "message": "Process is successfully completed"
+    }
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Editar una empresa
+### PUT /api/companies/{company_id}
+    body {
+        "name": "required|string|min:3|unique",
+        "country": "required|string|min:3"
+    }
 
-## Learning Laravel
+    return 204 No Content
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Listado de empresas
+### GET /api/companies
+    return 200
+    {
+        "data": [
+            {
+                "id": 1,
+                "name": "Corkery, Raynor and Greenholt",
+                "country": "Rwanda"
+            },
+            {
+                "id": 2,
+                "name": "Thompson-Rowe",
+                "country": "Maldives"
+            },
+            {
+                "id": 3,
+                "name": "Herman LLC",
+                "country": "Eritrea"
+            }
+        ],
+        "status": true,
+        "message": "Process is successfully completed"
+    }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Obtener empresa
+### GET /api/companies/{company_id}
+    return 200
+    {
+        "data": {
+            "id": 1,
+            "name": "Corkery, Raynor and Greenholt",
+            "country": "Rwanda"
+        },
+        "status": true,
+        "message": "Process is successfully completed"
+    }
 
-## Laravel Sponsors
+## Borrar empresa
+### DELETE /api/companies/{company_id}
+    return 204 No Content
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Listado de pantallas perteneciente a una empresa
+### GET /api/companies/{company_id}/displays
+    return 200
+    {
+        "data": {
+            "id": 1,
+            "name": "Corkery, Raynor and Greenholt",
+            "country": "Rwanda"
+            "displays": [
+                {
+                    "id": 3,
+                    "name": "Trace Kihn",
+                    "latitude": "-6.79",
+                    "longitude": "-129.10",
+                    "type": "outdoor",
+                    "price": "82.44"
+                }
+            ]
+        },
+        "status": true,
+        "message": "Process is successfully completed"
+    }
 
-### Premium Partners
+## Crear nueva pantalla
+### POST /api/displays
+    body {
+        "name": "required|string|min:3|unique",
+        "company_id": "required|int",
+        "latitude": "required|numeric",
+        "longitude": "required|numeric",
+        "type" "required|in:indoor,outdoor"
+    }
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+    return 201
+    {
+        "data": {
+            "id": 7,
+            "name": "testDisplay",
+            "latitude": 28.35,
+            "longitude": 12.28,
+            "type": "indoor",
+            "price": 50.12
+        },
+        "status": true,
+        "message": "Process is successfully completed"
+    }
 
-## Contributing
+## Editar una pantalla
+### PUT /api/displays/{display_id}
+    body {
+        "name": "required|string|min:3|unique",
+        "company_id": "required|int",
+        "latitude": "required|numeric",
+        "longitude": "required|numeric",
+        "type" "required|in:indoor,outdoor"
+    }
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    return 204 No Content
 
-## Code of Conduct
+## Listado de pantallas
+### GET /api/displays
+    query_params {
+        "country": "Argentina"
+    }
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    return 200
+    {
+        "data": [
+            {
+                "id": 1,
+                "name": "Cecilia Reichert",
+                "latitude": "-32.85",
+                "longitude": "46.63",
+                "type": "outdoor",
+                "price": "987.31",
+                "company": {
+                    "id": 1,
+                    "name": "Corkery, Raynor and Greenholt",
+                    "country": "Argentina"
+                }
+            }
+        ],
+        "status": true,
+        "message": "Process is successfully completed"
+    }
 
-## Security Vulnerabilities
+## Obtener pantalla
+### GET /api/displays/{display_id}
+    return 200
+    {
+        "data": {
+            "id": 1,
+            "name": "Cecilia Reichert",
+            "latitude": "-32.85",
+            "longitude": "46.63",
+            "type": "outdoor",
+            "price": "987.31",
+            "company": {
+                "id": 1,
+                "name": "Koelpin-Bernhard",
+                "country": "Argentina"
+            }
+        },
+        "status": true,
+        "message": "Process is successfully completed"
+    }
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Borrar pantalla
+### DELETE /api/displays/{display_id}
+    return 204 No Content
 
-## License
+# Endpoint opcional
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Cargar foto a una pantalla
+### POST /api/displays/{display_id}/photos
+    body {
+        "photo": "required|image|max:2048"
+    }
+
+    return 201
+    {
+        data": {
+            "id": 3,
+            "path": "/storage/displays/0MhsWYh3oc4DvB0ww.jpg"
+        }
+    }

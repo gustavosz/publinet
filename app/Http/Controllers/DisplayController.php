@@ -49,6 +49,8 @@ class DisplayController extends Controller
      */
     public function show(Display $display)
     {
+        $display->load('company');
+
         return new DisplayResource($display);
     }
 
