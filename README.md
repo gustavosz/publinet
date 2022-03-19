@@ -2,6 +2,13 @@
 
 Prueba técnica
 
+# Instalación
+1. Clonar repositorio
+2. Configurar .env
+3. Correr php artisan install
+4. Correr php artisan migrate:refresh --seed
+5. Opcional: en caso de querer ver las imagenes subidas en el navegador correr el comando: php artisan storage:link
+
 # Endpoints requeridos
 
 ## Crear nueva empresa
