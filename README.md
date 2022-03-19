@@ -2,7 +2,11 @@
 
 Prueba técnica
 
-# Instalación
+# Servidor
+1. Corriendo en Heroku
+2. Url: https://publinet.herokuapp.com/
+
+# Instalación local
 1. Clonar repositorio
 2. Configurar .env
 3. Correr php artisan install
