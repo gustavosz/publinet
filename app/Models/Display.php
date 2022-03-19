@@ -15,4 +15,9 @@ class Display extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
 }

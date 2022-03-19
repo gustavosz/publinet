@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::get('companies/{company}/displays', [CompanyController::class, 'displays'
 Route::apiResource('companies', CompanyController::class);
 
 Route::apiResource('displays', DisplayController::class);
+
+Route::post('displays/{display}/photos', [PhotoController::class, 'store']);
