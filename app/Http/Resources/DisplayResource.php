@@ -21,7 +21,21 @@ class DisplayResource extends JsonResource
             'latitude'  => $this->latitude,
             'longitude' => $this->longitude,
             'type'      => $this->type,
-            'price'     => $this->price
+            'price'     => $this->price,
+            'company'   => $this->when(
+                $this->relationLoaded('company'),
+                function () {
+                    return new CompanyResource($this->company);
+                }
+            )
+        ];
+    }
+
+    public function with($request)
+    {
+        return [
+            'status' => true,
+            'message' => 'Process is successfully completed',
         ];
     }
 }

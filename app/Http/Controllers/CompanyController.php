@@ -74,6 +74,9 @@ class CompanyController extends Controller
         return response()->json()->setStatusCode(204);
     }
 
+    /**
+     * List all display from a company
+     */
     public function displays(Company $company)
     {
         $company->load('displays');
